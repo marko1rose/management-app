@@ -1,0 +1,9 @@
+package com.demo.project.managementapp.repository;
+
+import com.demo.project.managementapp.model.Actor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ActorRepository extends JpaRepository<Actor, Long> {
+}
