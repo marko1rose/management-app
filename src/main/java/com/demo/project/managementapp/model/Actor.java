@@ -1,13 +1,19 @@
 package com.demo.project.managementapp.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Actor {
 
     @Id
@@ -18,7 +24,8 @@ public class Actor {
     private String lastName;
     private LocalDate bornDate;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany
+    @JoinTable(name = "movie_actor", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "imdbId"))
     private List<Movie> movies;
 
 }

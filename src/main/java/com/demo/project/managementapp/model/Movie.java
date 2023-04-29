@@ -1,24 +1,28 @@
 package com.demo.project.managementapp.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Movie {
 
     @Id
-    private String imdbID;
+    private String imdbId;
     private String title;
-    private int year;
+    private int releaseYear;
     private String description;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "movies")
     private List<Actor> actors;
 
     @ElementCollection
-    private List<String> pictures;
+    private List<String> pictures = new ArrayList<>();
 
 }
