@@ -1,0 +1,12 @@
+version: "1"
+services:
+  user-service:
+    build: ./actor-service
+    ports:
+      - "8080:8080"
+  order-service:
+    build: ./movie-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - actor-service
