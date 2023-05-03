@@ -27,7 +27,6 @@ public class Movie {
     @NotNull
     private String description;
 
-    @JsonIgnoreProperties("movies")
     @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Actor> actors;
 

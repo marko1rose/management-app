@@ -2,7 +2,6 @@ package com.demo.project.managementapp.actorservice;
 
 import com.demo.project.managementapp.model.Actor;
 import com.demo.project.managementapp.repository.ActorRepository;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,9 +20,6 @@ public class ActorService implements IActorService {
 
     @Override
     public Actor createActor(Actor actor) {
-        if(actorRepository.findById(actor.getId()).isPresent()) {
-            throw new EntityExistsException("Actor with id " + actor.getId() + " already exists");
-        }
         return actorRepository.save(actor);
     }
 

@@ -1,6 +1,5 @@
 package com.demo.project.managementapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -29,9 +28,14 @@ public class Actor {
     @NotNull
     private LocalDate dateOfBirth;
 
-    @JsonIgnoreProperties("actors")
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinTable(name = "movie_actor", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "imdbId"))
     private List<Movie> movies;
 
+    public Actor(Long id, String firstName, String lastName, LocalDate dateOfBirth) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+    }
 }

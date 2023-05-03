@@ -39,14 +39,14 @@ public class ActorController {
     }
 
     @GetMapping("/allActors/pagination")
-    public ResponseEntity<List<Actor>> getActorsPagination(
+    public ResponseEntity<List<ActorDto>> getActorsPagination(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(actorMapper.fromActorList(actorService.getAllActorsPagination(page, size)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Actor> getActor(@PathVariable Long id) {
+    public ResponseEntity<ActorDto> getActor(@PathVariable Long id) {
         return ResponseEntity.ok(actorMapper.fromActor(actorService.getActor(id)));
     }
 
@@ -56,7 +56,7 @@ public class ActorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Actor> updateMovie(@PathVariable Long id, @RequestBody ActorDto actorDto) {
+    public ResponseEntity<ActorDto> updateMovie(@PathVariable Long id, @RequestBody ActorDto actorDto) {
         Actor actor = actorMapper.toActor(actorDto);
         return ResponseEntity.ok(actorMapper.fromActor(actorService.updateActor(id, actor)));
     }

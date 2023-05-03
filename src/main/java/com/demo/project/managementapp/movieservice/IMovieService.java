@@ -1,6 +1,5 @@
 package com.demo.project.managementapp.movieservice;
 
-import com.demo.project.managementapp.model.Actor;
 import com.demo.project.managementapp.model.Movie;
 
 import java.util.List;

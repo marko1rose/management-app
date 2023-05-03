@@ -21,25 +21,25 @@ public class MovieController {
     private MovieMapper movieMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<Movie> createMovie(@RequestBody MovieDto movieDto) {
+    public ResponseEntity<MovieDto> createMovie(@RequestBody MovieDto movieDto) {
         Movie movie = movieMapper.toMovie(movieDto);
         return ResponseEntity.ok(movieMapper.fromMovie(movieService.createMovie(movie)));
     }
 
     @GetMapping("/allMovies")
-    public ResponseEntity<List<Movie>> getAllMovies() {
+    public ResponseEntity<List<MovieDto>> getAllMovies() {
         return ResponseEntity.ok(movieMapper.fromMovieList(movieService.getAllMovies()));
     }
 
     @GetMapping("/allMovies/pagination")
-    public ResponseEntity<List<Movie>> getMoviesPagination(
+    public ResponseEntity<List<MovieDto>> getMoviesPagination(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(movieMapper.fromMovieList(movieService.getAllMoviesPagination(page, size)));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
+    public ResponseEntity<MovieDto> getMovieById(@PathVariable String id) {
         return ResponseEntity.ok(movieMapper.fromMovie(movieService.getMovie(id)));
     }
 
@@ -49,13 +49,13 @@ public class MovieController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable String id, @RequestBody MovieDto movieDto) {
+    public ResponseEntity<MovieDto> updateMovie(@PathVariable String id, @RequestBody MovieDto movieDto) {
         Movie movie = movieMapper.toMovie(movieDto);
         return ResponseEntity.ok(movieMapper.fromMovie(movieService.updateMovie(id, movie)));
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Movie>> searchMovieByTitle(@RequestParam String title) {
+    public ResponseEntity<List<MovieDto>> searchMovieByTitle(@RequestParam String title) {
         return ResponseEntity.ok(movieMapper.fromMovieList(movieService.findByTitle(title)));
     }
 
