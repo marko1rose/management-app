@@ -30,7 +30,7 @@ public class ActorService implements IActorService {
 
     @Override
     public List<Actor> getAllActorsPagination(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("title"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id"));
         Page<Actor> actors = actorRepository.findAll(pageable);
         return actors.getContent();
     }

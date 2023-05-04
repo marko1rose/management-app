@@ -28,7 +28,7 @@ public class ActorController {
     private ActorMapper actorMapper;
 
     @PostMapping("/create")
-    public ResponseEntity<ActorDto> createMovie(@RequestBody ActorDto actorDto) {
+    public ResponseEntity<ActorDto> createActor(@RequestBody ActorDto actorDto) {
         Actor actor = actorMapper.toActor(actorDto);
         return ResponseEntity.ok(actorMapper.fromActor(actorService.createActor(actor)));
     }
@@ -51,12 +51,12 @@ public class ActorController {
     }
 
     @DeleteMapping("/{id}")
-    void deleteEmployee(@PathVariable Long id) {
+    void deleteActor(@PathVariable Long id) {
         actorService.deleteActor(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ActorDto> updateMovie(@PathVariable Long id, @RequestBody ActorDto actorDto) {
+    public ResponseEntity<ActorDto> updateActor(@PathVariable Long id, @RequestBody ActorDto actorDto) {
         Actor actor = actorMapper.toActor(actorDto);
         return ResponseEntity.ok(actorMapper.fromActor(actorService.updateActor(id, actor)));
     }

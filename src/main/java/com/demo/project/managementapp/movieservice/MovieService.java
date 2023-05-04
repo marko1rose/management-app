@@ -2,7 +2,6 @@ package com.demo.project.managementapp.movieservice;
 
 import com.demo.project.managementapp.model.Movie;
 import com.demo.project.managementapp.repository.MovieRepository;
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,9 +20,6 @@ public class MovieService implements IMovieService {
 
     @Override
     public Movie createMovie(Movie movie) {
-        if(movieRepository.findById(movie.getImdbId()).isPresent()) {
-            throw new EntityExistsException("Movie with id " + movie.getImdbId() + " already exists");
-        }
         return movieRepository.save(movie);
     }
 
