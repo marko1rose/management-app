@@ -4,6 +4,8 @@ import com.demo.project.managementapp.model.Movie;
 import com.demo.project.managementapp.repository.MovieRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,16 +20,19 @@ public class MovieService implements IMovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    @CacheEvict(value = "movies", allEntries = true)
     @Override
     public Movie createMovie(Movie movie) {
         return movieRepository.save(movie);
     }
 
+    @Cacheable("movies")
     @Override
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
 
+    @Cacheable("movies")
     @Override
     public List<Movie> getAllMoviesPagination(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("title"));
@@ -40,11 +45,13 @@ public class MovieService implements IMovieService {
         return movieRepository.findById(id).orElse(null);
     }
 
+    @CacheEvict(value = "movies", allEntries = true)
     @Override
     public void deleteMovie(String id) {
         movieRepository.deleteById(id);
     }
 
+    @CacheEvict(value = "movies", allEntries = true)
     @Override
     public Movie updateMovie(String id , Movie movie) {
         Movie dbMovie = movieRepository.findById(id)
@@ -55,6 +62,7 @@ public class MovieService implements IMovieService {
         return movieRepository.save(dbMovie);
     }
 
+    @Cacheable("movies")
     @Override
     public List<Movie> findByTitle(String title) {
         return movieRepository.findByTitleContainsIgnoreCase(title);
