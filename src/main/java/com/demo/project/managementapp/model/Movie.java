@@ -1,10 +1,6 @@
 package com.demo.project.managementapp.model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,8 +26,8 @@ public class Movie {
     @NotNull
     private String description;
 
-    @ManyToMany(mappedBy = "movies", cascade = CascadeType.DETACH)
-    private List<Actor> actors;
+    @ManyToMany(mappedBy = "movies", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Actor> actors = new ArrayList<>();
 
     @ElementCollection
     private List<String> pictures = new ArrayList<>();
@@ -40,5 +36,12 @@ public class Movie {
         this.title = title;
         this.releaseYear = releaseYear;
         this.description = description;
+    }
+
+    @PreRemove
+    private void removeMoviesFromActors() {
+        for (Actor a : actors) {
+            a.getMovies().remove(this);
+        }
     }
 }

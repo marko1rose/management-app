@@ -1,13 +1,5 @@
 package com.demo.project.managementapp.service;
 
-import static java.util.Collections.singletonList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import com.demo.project.managementapp.model.Movie;
 import com.demo.project.managementapp.movieservice.IMovieService;
 import com.demo.project.managementapp.repository.MovieRepository;
@@ -25,6 +17,12 @@ import org.springframework.data.domain.Pageable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Collections.singletonList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -88,14 +86,14 @@ public class MovieServiceTest {
     }
 
     @Test
-    public void testDeleteActor() {
+    public void testDeleteMovie() {
         String id = "tt21302401";
         movieService.deleteMovie(id);
         verify(movieRepository, times(1)).deleteById(id);
     }
 
     @Test
-    public void testUpdateActorNotFound() {
+    public void testUpdateMovieNotFound() {
         String id = "tt21302401";
         Movie movie = createMovie(id);
         when(movieRepository.findById(id)).thenReturn(Optional.empty());
@@ -103,7 +101,7 @@ public class MovieServiceTest {
     }
 
     @Test
-    public void testUpdateActor() {
+    public void testUpdateMovie() {
         String id = "tt21302401";
         Movie existingMovie = createMovie(id);
         Movie updatedMovie = new Movie("Inception", 2010, "Movie description");
@@ -115,6 +113,17 @@ public class MovieServiceTest {
         assertEquals(result.getTitle(), updatedMovie.getTitle());
         assertEquals(result.getReleaseYear(), updatedMovie.getReleaseYear());
         assertEquals(result.getDescription(), updatedMovie.getDescription());
+    }
+
+    @Test
+    public void testFindMovieByTitle() {
+        String id = "tt21302401";
+        Movie movie = createMovie(id);
+        when(movieRepository.findByTitleContainsIgnoreCase(movie.getTitle())).thenReturn(singletonList(movie));
+
+        List<Movie> result = movieService.findByTitle(movie.getTitle());
+
+        assertEquals(1, result.size());
     }
 
     private Movie createMovie(String id) {
