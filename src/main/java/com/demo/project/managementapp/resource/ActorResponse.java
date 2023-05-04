@@ -1,4 +1,4 @@
-package com.demo.project.managementapp.dto;
+package com.demo.project.managementapp.resource;
 
 import lombok.Data;
 
@@ -6,10 +6,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class ActorDto {
+public class ActorResponse {
   private Long id;
   private String firstName;
   private String lastName;
   private LocalDate dateOfBirth;
-  private List<MovieDto> movies;
+  private List<MovieResponse> movies;
 }

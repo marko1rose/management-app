@@ -6,15 +6,15 @@ INSERT INTO movie (imdb_id, title, release_year, description) VALUES ('tt0068646
 INSERT INTO movie (imdb_id, title, release_year, description) VALUES ('tt0468569', 'The Dark Knight', 2008, 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.');
 
 -- Create a few actors
-INSERT INTO actor (id, first_name, last_name, date_of_birth) VALUES (1, 'Elijah', 'Wood', '1981-01-28');
+INSERT INTO actor (first_name, last_name, date_of_birth) VALUES ('Elijah', 'Wood', '1981-01-28');
 
-INSERT INTO actor (id, first_name, last_name, date_of_birth) VALUES (2, 'Ian', 'McKellen', '1939-05-25');
+INSERT INTO actor (first_name, last_name, date_of_birth) VALUES ('Ian', 'McKellen', '1939-05-25');
 
-INSERT INTO actor (id, first_name, last_name, date_of_birth) VALUES (3, 'Marlon', 'Brando', '1924-04-03');
+INSERT INTO actor (first_name, last_name, date_of_birth) VALUES ('Marlon', 'Brando', '1924-04-03');
 
-INSERT INTO actor (id, first_name, last_name, date_of_birth) VALUES (4, 'Al', 'Pacino', '1940-04-25');
+INSERT INTO actor (first_name, last_name, date_of_birth) VALUES ('Al', 'Pacino', '1940-04-25');
 
-INSERT INTO actor (id, first_name, last_name, date_of_birth) VALUES (5, 'Christian', 'Bale', '1974-01-30');
+INSERT INTO actor (first_name, last_name, date_of_birth) VALUES ('Christian', 'Bale', '1974-01-30');
 
 -- Add actors to movies
 INSERT INTO movie_actor (imdb_id, id) VALUES ('tt0120737', 1);

@@ -1,9 +1,10 @@
 package com.demo.project.managementapp.mapper;
 
-import com.demo.project.managementapp.dto.ActorDto;
-import com.demo.project.managementapp.dto.MovieDto;
 import com.demo.project.managementapp.model.Actor;
 import com.demo.project.managementapp.model.Movie;
+import com.demo.project.managementapp.resource.ActorResource;
+import com.demo.project.managementapp.resource.ActorResponse;
+import com.demo.project.managementapp.resource.MovieResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,13 +13,14 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ActorMapper {
 
-  Actor toActor(ActorDto actorDto);
+  @Mapping(target = "id", ignore = true)
+  Actor toActor(ActorResource actorResource);
 
-  ActorDto fromActor(Actor actor);
+  ActorResponse fromActor(Actor actor);
 
   @Mapping(target = "actors", ignore = true)
-  MovieDto toMovieDto(Movie movie);
+  MovieResponse toMovieResponse(Movie movie);
 
-  List<ActorDto> fromActorList(List<Actor> actors);
+  List<ActorResponse> fromActorList(List<Actor> actors);
 
 }
