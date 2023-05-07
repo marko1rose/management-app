@@ -1,12 +1,17 @@
 version: "3"
 services:
-  user-service:
-    build: ./actorservice
+  actor-service:
+    image: actor-service
+    build:
+      context: ./
     ports:
       - "8080:8080"
-  order-service:
-    build: ./movieservice
+
+  movie-service:
+    image: movie-service
+    build:
+      context: ./
     ports:
       - "8081:8081"
     depends_on:
-      - actorservice
+      - actor-service
